@@ -8,7 +8,7 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import robot from '../images/robot.png';
+import robot from '../images/logos/robot.png';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;

@@ -8,11 +8,11 @@ import {
     Image,
     TextInput,
 } from 'react-native';
-import arrow from '../images/arrow.png';
-import share from '../images/share.png';
-import heart from '../images/heart.png';
-import email from '../images/email.png';
-import phone from '../images/phone.png';
+import arrow from '../images/logos/arrow.png';
+import share from '../images/logos/share.png';
+import heart from '../images/logos/heart.png';
+import email from '../images/logos/email.png';
+import phone from '../images/logos/phone.png';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
