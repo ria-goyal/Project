@@ -44,8 +44,43 @@ export default function Workinfocard() {
                     <Text style={styles.worktext}>WORk</Text>
                     <View style={styles.line}></View>
                 </View>
-                <View>
-                    
+                <View style={styles.detailsview}>
+                    <View style={styles.detailstopview}>
+                        <View>
+                            <Text style={styles.detailstopleft}>Name:</Text>
+                        </View>
+                        <View >
+                            <Text style={styles.detailstopright}>Paid Work:</Text>
+                        </View>
+                    </View>
+                    <View style={styles.detailsbottomview}>
+                        <Text style={styles.detailsbottomtext}>Requirements:</Text>
+                    </View>
+                </View>
+                <View style={styles.line1}></View>
+                <View style={styles.descriptionview}>
+                    <View style={styles.descriptiontext}>
+                        <Text style={styles.descriptiontext1}>Description:</Text>
+                    </View>
+                </View>
+                <View style={styles.line1}></View>
+                <View style={styles.contactview}>
+                    <View style={styles.contacttext}>
+                        <Text style={styles.contacttext1}>Contact Details:</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.contacttext2}>Owner Name:</Text>
+                    </View>
+                    <View style={styles.contactdetail}>
+                        <View style={styles.phonedetail}>
+                            <Image source={phone} style={styles.phoneimage} />
+                            <Text style={styles.phonetext}>0123456789</Text>
+                        </View>
+                        <View style={styles.emaildetail}>
+                            <Image source={email} style={styles.emailimage} />
+                            <Text style={styles.emailtext}>training@gmail.com</Text>
+                        </View>
+                    </View>
                 </View>
             </View>
         </>
@@ -63,9 +98,9 @@ const styles = StyleSheet.create({
     },
     iconsview: {
         flexDirection: 'row',
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         alignItems: 'center',
-        height: h * 0.065,
+        height: h * 0.08,
     },
     arrowimage: {
         width: w * 0.095,
@@ -78,31 +113,114 @@ const styles = StyleSheet.create({
         marginLeft: 290,
     },
     logoview: {
-        // flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // marginTop: 70,
-      },
+        marginTop: 10
+    },
     line: {
-        width: w * 0.3,
+        width: w * 0.33,
         height: h * 0.003,
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         borderRadius: 20,
-        marginLeft: 2,
+
     },
     worktextview: {
         // flex:1,
         height: h * 0.05,
-        backgroundColor: 'grey',
+        // backgroundColor: 'grey',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 45,
+        marginBottom: 20,
         marginTop: 5,
     },
     worktext: {
         fontSize: 27,
         marginHorizontal: 10,
-        color: 'white',
+        color: 'black',
+    },
+    detailsview: {
+        // backgroundColor:'white',
+        height: h * .2,
+        marginLeft: 10
+    },
+    detailstopview: {
+        flexDirection: 'row',
+
+    },
+    detailstopright: {
+        fontSize: 18,
+        marginLeft: 180,
+        color: 'black'
+    },
+    detailstopleft: {
+        fontSize: 18,
+        color: 'black',
+
+    },
+    detailsbottomtext: {
+        color: 'black',
+        fontSize: 18,
+        marginTop: 40
+    },
+    line1: {
+        width: w * 0.87,
+        height: h * 0.003,
+        backgroundColor: 'black',
+        borderRadius: 20,
+        marginHorizontal: 20,
+    },
+    descriptionview: {
+        height: h * .22
+    },
+    descriptiontext1: {
+        fontSize: 18,
+        marginTop: 20,
+        marginLeft: 10,
+        color: 'black'
+    },
+    contactview: {
+        // backgroundColor:'white',
+        marginTop: 25,
+        marginLeft: 10
+    },
+    contacttext1: {
+        fontSize: 18,
+        // marginTop: 15,
+        // marginLeft: 10,
+        color: 'black'
+    },
+    contacttext2: {
+        fontSize: 18,
+        marginTop: 25,
+        // marginLeft: 25,
+        color: 'black'
+    },
+    contactdetail: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 20,
+        // marginLeft: 15
+    },
+    phonedetail: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 20
+    },
+    phonetext: {
+        fontSize: 18,
+        color: 'black'
+    },
+    emailimage: {
+        height: h * .035,
+        width: w * .08
+    },
+    emailtext: {
+        fontSize: 18,
+        color: 'black'
+    },
+    emaildetail: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
 });

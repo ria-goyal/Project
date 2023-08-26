@@ -13,6 +13,7 @@ import share from '../images/logos/share.png';
 import heart from '../images/logos/heart.png';
 import email from '../images/logos/email.png';
 import phone from '../images/logos/phone.png';
+import ImageSliderComponent from '../component/Imageslidercomponent';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
@@ -34,6 +35,7 @@ export default function Productioninfocard() {
                             </View>
                         </TouchableOpacity>
                     </View>
+                    <ImageSliderComponent/>
                 </View>
                 <View style={styles.productview}>
                     <View style={styles.detailsview}>
@@ -88,14 +90,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#A3A9FF',
     },
     topview: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: 'skyblue',
     },
     iconsview: {
         flexDirection: 'row',
-        // backgroundColor:'green',
+        backgroundColor:'white',
         alignItems: 'center',
-        height: h * 0.065,
+        height: h * 0.06,
     },
     arrowimage: {
         width: w * 0.095,
@@ -108,16 +110,16 @@ const styles = StyleSheet.create({
         marginLeft: 290,
     },
     productview: {
-        flex: 1,
+        // flex: 1,
         // backgroundColor: 'yellow',
     },
     detailsview: {
-        marginTop: 10
+        marginTop: 30
     },
     detailstopview: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 15,
+        // marginTop: 15,
         marginHorizontal: 10
     },
     detailstext: {
@@ -140,33 +142,33 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     descriptionview: {
-        height: h * .18
+        height: h * .2,
+        // backgroundColor:'white',
+        marginLeft: 10,
     },
     descriptiontext1: {
         fontSize: 18,
-        marginTop: 5,
-        marginLeft: 10,
+        marginTop: 15,
         color: 'black'
     },
     contactview: {
+        marginLeft: 15,
     },
     contacttext1: {
         fontSize: 18,
-        marginTop: 5,
-        marginLeft: 10,
+        marginTop: 15,
+       
         color: 'black'
     },
     contacttext2: {
         fontSize: 18,
-        marginTop: 10,
-        marginLeft: 35,
+        marginTop: 15,
         color: 'black'
     },
     contactdetail: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 10,
-        marginLeft: 15
+        marginTop: 15,
     },
     phonedetail: {
         flexDirection: 'row',
