@@ -41,7 +41,7 @@ export default function Startscreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFE1A8',
+    backgroundColor: '#A3A9FF',
   },
   logoview: {
     flex: 2,
@@ -64,22 +64,22 @@ const styles = StyleSheet.create({
     height: h * 0.3,
   },
   text: {
-    fontSize: 35,
+    fontSize: 40,
     color: 'black',
     fontWeight: '600',
-    marginTop: 15,
+    marginTop: 20,
   },
   buttonview: {
     flex: 1,
     alignItems: 'center',
   },
   btn: {
-    backgroundColor: 'white',
+    backgroundColor: '#FFC545',
     alignItems: 'center',
     justifyContent: 'center',
     height: h * 0.065,
-    width: w * 0.49,
-    borderRadius: 23,
+    width: w * 0.7,
+    borderRadius: 25,
     marginTop: 20,
   },
   btntext: {

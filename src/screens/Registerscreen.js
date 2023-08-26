@@ -20,23 +20,28 @@ export default function Register() {
         <View style={styles.logoview}>
           <Image source={robot} style={styles.logo} />
         </View>
+        <View style={styles.signuptextview}>
+          <View style={styles.line}></View>
+          <Text style={styles.signuptext}>SIGN UP</Text>
+          <View style={styles.line}></View>
+        </View>
         <View style={styles.inputview}>
             <View>
                 <TextInput placeholder='Enter Name' style={styles.inputtext}/>
             </View>
-            <View style={styles.lineview}></View>
+            {/* <View style={styles.lineview}></View> */}
             <View>
                 <TextInput placeholder='Enter Email Address' style={styles.inputtext}/>
             </View>
-            <View style={styles.lineview}></View>
+            {/* <View style={styles.lineview}></View> */}
             <View>
                 <TextInput placeholder='Enter Password' style={styles.inputtext}/>
             </View>
-            <View style={styles.lineview}></View>
+            {/* <View style={styles.lineview}></View> */}
             <View>
                 <TextInput placeholder='Confirm Password' style={styles.inputtext}/>
             </View>
-            <View style={styles.lineview}></View>
+            {/* <View style={styles.lineview}></View> */}
         </View>
         <View style={styles.signupview}>
           <TouchableOpacity>
@@ -51,8 +56,8 @@ export default function Register() {
                 <Text style={styles.logintext}>Already have an account?</Text>
             </View>
             <TouchableOpacity>
-                <Text style={styles.logintext1}>Log in.</Text>
-                <View style={styles.loginline}></View>
+                <Text style={styles.logintext1}>Log In.</Text>
+                {/* <View style={styles.loginline}></View> */}
             </TouchableOpacity>
         </View>
       </View>
@@ -63,50 +68,75 @@ export default function Register() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFE1A8',
+    backgroundColor: '#A3A9FF',
   },
   logoview: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom:20
+    // marginBottom:10
+  },
+  line: {
+    width: w * 0.3,
+    height: h * 0.003,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    marginLeft: 2,
+  },
+  signuptextview: {
+    // flex:1,
+    height: h * 0.05,
+    // backgroundColor:'grey',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 40,
+    marginTop: 5,
+  },
+  signuptext: {
+    fontSize: 27,
+    marginHorizontal: 10,
+    color: 'white',
   },
   inputview: {
-    flex: 4,
+    // flex: 4,
   },
   inputtext:{
-    fontSize:25,
-    fontWeight:'500',
-    marginTop:33,
-    height:h*.07,
-    marginHorizontal:20,
-    color:'black'
+    fontSize: 20,
+    height: h * 0.07,
+    marginHorizontal: 25,
+    color: 'black',
+    backgroundColor: '#C1C5FF',
+    borderColor: 'white',
+    borderWidth: 2,
+    borderRadius: 10,
+    marginBottom: 24,
   },
-  lineview:{
-    width:w*.9,
-    height:h*.003,
-    backgroundColor:'black',
-    borderRadius:20,
-    marginHorizontal:20,
-    marginTop:5
-  },
+  // lineview:{
+  //   width:w*.9,
+  //   height:h*.003,
+  //   backgroundColor:'black',
+  //   borderRadius:20,
+  //   marginHorizontal:20,
+  //   marginTop:5
+  // },
   lineview1:{
-    width:w,
+    width:w*.87,
     height:h*.003,
-    backgroundColor:'black',
+    backgroundColor:'white',
     borderRadius:20,
-    marginTop:5
+    marginHorizontal:20
   },
   signupview: {
     flex: 1,
     alignItems: 'center',
   },
   signupbtn: {
-    backgroundColor: 'white',
+    backgroundColor: '#FFC545',
     alignItems: 'center',
     justifyContent: 'center',
     height: h * 0.065,
-    width: w * 0.6,
+    width: w * 0.85,
     borderRadius: 25,
   },
   signupbtntext: {
@@ -119,20 +149,23 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
+    marginBottom:35
 
   },
   logintext:{
-    fontSize:18
+    fontSize:18,
+    color:'white'
   },
   logintext1:{
     fontSize:18,
-    marginLeft:5
+    marginLeft:9,
+    color:'#FFC545'
   },
-  loginline:{
-    width:w*.14,
-    height:h*.002,
-    backgroundColor:'black',
-    borderRadius:20,
-    marginLeft:2
-  }
+  // loginline:{
+  //   width:w*.14,
+  //   height:h*.002,
+  //   backgroundColor:'black',
+  //   borderRadius:20,
+  //   marginLeft:2
+  // }
 });
