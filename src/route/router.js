@@ -1,7 +1,7 @@
 import React from 'react'
-import {NavigationContainer} from '@react-navigation/native'
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {Text,View} from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Text, View } from 'react-native'
 import Startscreen from '../screens/Startscreen'
 import Registerscreen from '../screens/Registerscreen'
 import Loginscreen from '../screens/Loginscreen'
@@ -14,11 +14,16 @@ import Newpasswodscreen from '../screens/Newpasswordscreen'
 import Account from '../screens/Account'
 import Sell from '../screens/Sell'
 import Freelance from '../screens/Freelance'
-const tab=createBottomTabNavigator();
+import Productedit from '../screens/Producteditscreen'
+import Workedit from '../screens/Workeditscreen'
+const tab = createBottomTabNavigator();
 
-export default function Router(){
-    return(<>
-        <NavigationContainer>
+export default function Router() {
+    return (
+        <>
+        <Workedit />
+
+            {/* <NavigationContainer>
             <tab.Navigator screenOptions={
                 {
                     headerShown:false
@@ -29,8 +34,8 @@ export default function Router(){
                 <tab.Screen name='Freelance' component={Freelance}/>
                 <tab.Screen name='Account' component={Account}/>
             </tab.Navigator>
-        </NavigationContainer>
-        
-    </>
+        </NavigationContainer> */}
+
+        </>
     )
 } 

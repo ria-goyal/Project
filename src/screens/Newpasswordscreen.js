@@ -20,7 +20,7 @@ export default function Forgotpassword() {
         <>
             <View style={styles.container}>
                 <TouchableOpacity>
-                    <View source={arrow} style={styles.arrowview}>
+                    <View  style={styles.arrowview}>
                         <Image source={arrow} style={styles.arrow} />
                     </View>
                 </TouchableOpacity>
