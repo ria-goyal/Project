@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'pink'
     },
     card_text: {
-        fontSize: 19,
+        fontSize: 17,
         color: 'black'
     },
     textbox: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         
     },
     btn:{
-        marginHorizontal:w*.027,
+        marginHorizontal:w*.02,
        
     }
 })

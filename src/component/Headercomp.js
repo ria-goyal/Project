@@ -4,6 +4,7 @@ const w= Dimensions.get('window').width
 const h= Dimensions.get('window').height
 import review from '../images/logos/review.png'
 import location from "../images/logos/location.png"
+import { colors } from '../global/style'
 export default function Headercomponent(){
     return(
         <>
@@ -20,8 +21,9 @@ export default function Headercomponent(){
 const style=StyleSheet.create(
     {
         container:{
-            padding:w*.03,
-            backgroundColor:'transparent',
+            paddingHorizontal:w*.03,
+            paddingVertical:h*.01,
+            backgroundColor:'#756174',
             flexDirection:'row',
             
         },

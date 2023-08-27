@@ -1,5 +1,33 @@
 module.exports={
     colors:{
-        back:'#E7E9FA'
-    }
+        back:'white',
+        purple:'#731670'
+    },
+    hr_bar:{
+        backgroundColor:'gray',
+        width:'80%',
+        borderColor:'black',
+        borderBottomWidth:0.3,
+        height:2.4,
+        marginVertical:5,
+        alignSelf:'center',
+        borderRadius:1
+    },
+    heading:{
+        fontSize:30,
+        color:'purple',
+        textAlign:'center',
+        fontWeight:'bold',
+        marginTop:10
+    },
+    hr_bar_b:{
+        backgroundColor:'black',
+        width:'80%',
+        borderColor:'black',
+        borderBottomWidth:0.3,
+        height:2.4,
+        marginVertical:5,
+        alignSelf:'center',
+        borderRadius:1
+    },
 }

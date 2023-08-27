@@ -4,25 +4,27 @@ import { heading,colors} from '../global/style'
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
 
-const Freelance = () => {
+const Sell = () => {
     const [press,setPress]=useState(false)
 
   return (
     <View style={styles.container}>
-      <View ><Text style={heading}>Enter Details</Text></View>
+      <View ><Text style={heading}>Enter Product Details</Text></View>
       <View style={styles.form}>
-        <TextInput placeholder='Your Name' placeholderTextColor={'black'} style={styles.input_box}/>
-        <TextInput placeholder='Requirements' placeholderTextColor={'black'} style={styles.input_box}/>
+        <TextInput placeholder='Product Title/Name' placeholderTextColor={'black'} style={styles.input_box}/>
+        <TextInput placeholder='Category(Mobile,book..etc)' placeholderTextColor={'black'} style={styles.input_box}/>
         <TextInput placeholder='Price offerred' placeholderTextColor={'black'} style={styles.input_box}/>
-        <TextInput placeholder='Description (About the work)' placeholderTextColor={'black'} style={styles.input_box}/>
+        <TextInput placeholder='Brand(If any)' placeholderTextColor={'black'} style={styles.input_box}/>
+        <TextInput placeholder='Description' placeholderTextColor={'black'} style={styles.input_box}/>
         <TextInput placeholder='Contact details' placeholderTextColor={'black'} style={styles.input_box}/>
+        <TextInput placeholder='Upload Images' placeholderTextColor={'black'} style={styles.input_box}/>
         <TouchableOpacity style={press? styles.btn:styles.btn1} onPressIn={()=>setPress(true)} ><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
       </View>
     </View>
   )
 }
 
-export default Freelance
+export default Sell
 
 const styles = StyleSheet.create({
     container:{

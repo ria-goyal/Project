@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
         
     },
     slider:{
-        marginVertical:h*.02,
-        marginHorizontal:w*.03,
-        borderRadius:w*.2,
+        // marginVertical:h*.012,
+        // marginHorizontal:w*.03,
+        
         overflow:'hidden',
         elevation:5
     }

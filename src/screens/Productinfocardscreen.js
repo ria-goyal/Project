@@ -14,6 +14,7 @@ import heart from '../images/logos/heart.png';
 import email from '../images/logos/email.png';
 import phone from '../images/logos/phone.png';
 import ImageSliderComponent from '../component/Imageslidercomponent';
+import { hr_bar_b } from '../global/style';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
@@ -35,7 +36,7 @@ export default function Productioninfocard() {
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <ImageSliderComponent/>
+                    <ImageSliderComponent />
                 </View>
                 <View style={styles.productview}>
                     <View style={styles.detailsview}>
@@ -50,16 +51,22 @@ export default function Productioninfocard() {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.detailsbottomview}>
+                            <Text style={styles.detailstext}>Category:</Text>
+                        </View>
+                        <View style={styles.detailsbottomview}>
                             <Text style={styles.detailstext}>Rate:</Text>
                         </View>
+                        <View style={styles.detailsbottomview}>
+                            <Text style={styles.detailstext}>Brand:</Text>
+                        </View>
                     </View>
-                    <View style={styles.line1}></View>
+                    <View style={hr_bar_b}></View>
                     <View style={styles.descriptionview}>
                         <View style={styles.descriptiontext}>
                             <Text style={styles.descriptiontext1}>Description:</Text>
                         </View>
                     </View>
-                    <View style={styles.line1}></View>
+                    <View style={hr_bar_b}></View>
                     <View style={styles.contactview}>
                         <View style={styles.contacttext}>
                             <Text style={styles.contacttext1}>Contact Details:</Text>
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
     },
     iconsview: {
         flexDirection: 'row',
-        backgroundColor:'white',
+        backgroundColor: 'white',
         alignItems: 'center',
         height: h * 0.06,
     },
@@ -114,13 +121,14 @@ const styles = StyleSheet.create({
         // backgroundColor: 'yellow',
     },
     detailsview: {
-        marginTop: 30
+        marginTop:h*.01
     },
     detailstopview: {
         flexDirection: 'row',
         alignItems: 'center',
         // marginTop: 15,
-        marginHorizontal: 10
+        paddingHorizontal:w*.02,
+        marginHorizontal:w*.02
     },
     detailstext: {
         fontSize: 19,
@@ -131,16 +139,17 @@ const styles = StyleSheet.create({
         width: w * .078
     },
     detailsbottomview: {
-        marginVertical: 20,
-        marginHorizontal: 10
+        marginTop:h*.005,
+        paddingHorizontal:w*.02,
+        marginHorizontal:h*.01
     },
-    line1: {
-        width: w * 0.87,
-        height: h * 0.003,
-        backgroundColor: 'black',
-        borderRadius: 20,
-        marginHorizontal: 20,
-    },
+    // line1: {
+    //     width: w * 0.87,
+    //     height: h * 0.003,
+    //     backgroundColor: 'black',
+    //     borderRadius: 20,
+    //     marginHorizontal: 20,
+    // },
     descriptionview: {
         height: h * .2,
         // backgroundColor:'white',
@@ -148,8 +157,10 @@ const styles = StyleSheet.create({
     },
     descriptiontext1: {
         fontSize: 18,
-        marginTop: 15,
-        color: 'black'
+        // marginTop: 15,
+        paddingHorizontal:w*.02,
+        color: 'black',
+
     },
     contactview: {
         marginLeft: 15,
@@ -157,7 +168,7 @@ const styles = StyleSheet.create({
     contacttext1: {
         fontSize: 18,
         marginTop: 15,
-       
+
         color: 'black'
     },
     contacttext2: {
