@@ -15,7 +15,12 @@ import arrow from '../images/logos/arrow.png';
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Forgotpassword() {
+export default function Forgotpassword({navigation}) {
+
+    function Newpassword(){
+        alert("enter new password" )
+        navigation.navigate('newpassword')
+      }
     return (
         <>
             <View style={styles.container}>
@@ -44,7 +49,7 @@ export default function Forgotpassword() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.submitview}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={Newpassword}>
                         <View style={styles.submitbtn}>
                             <Text style={styles.submitbtntext}>SUBMIT</Text>
                         </View>

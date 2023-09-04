@@ -19,13 +19,16 @@ import { hr_bar_b } from '../global/style';
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Productioninfocard() {
+export default function Productinfocard({navigation}) {
+    function Backbutton(){
+        navigation.goBack()
+    }
     return (
         <>
             <View style={styles.container}>
                 <View style={styles.topview}>
                     <View style={styles.iconsview}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={Backbutton}>
                             <View style={styles.arrowview}>
                                 <Image source={arrow} style={styles.arrowimage} />
                             </View>

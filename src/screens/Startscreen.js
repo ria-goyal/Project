@@ -12,7 +12,12 @@ import robot from '../images/logos/robot.png';
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Startscreen() {
+export default function Startscreen({navigation}) {
+
+  function Startapp(){
+    // alert('Explore our ')
+    navigation.navigate('home')
+}
   return (
     <>
       <View style={styles.container}>
@@ -27,7 +32,7 @@ export default function Startscreen() {
           </View>
         </View>
         <View style={styles.buttonview}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={Startapp}>
             <View style={styles.btn}>
               <Text style={styles.btntext}>START</Text>
             </View>

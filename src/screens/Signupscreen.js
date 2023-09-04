@@ -13,7 +13,14 @@ import robot from '../images/logos/robot.png';
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Register() {
+export default function Signup({navigation}) {
+
+  function Loginpage(){
+    // navigation.navigate('productcard')
+    // alert('Login first')
+    navigation.navigate('login')
+}
+
   return (
     <>
       <View style={styles.container}>
@@ -44,7 +51,7 @@ export default function Register() {
             {/* <View style={styles.lineview}></View> */}
         </View>
         <View style={styles.signupview}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={Loginpage}>
             <View style={styles.signupbtn}>
               <Text style={styles.signupbtntext}>SIGN UP</Text>
             </View>
@@ -55,7 +62,7 @@ export default function Register() {
             <View >
                 <Text style={styles.logintext}>Already have an account?</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={Loginpage}>
                 <Text style={styles.logintext1}>Log In.</Text>
                 {/* <View style={styles.loginline}></View> */}
             </TouchableOpacity>

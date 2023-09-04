@@ -5,14 +5,19 @@ const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
 
 
-const Cards = () => {
+export default function Cards({navigation}){
+
+    function Productcard(){
+        navigation.navigate('productcard')
+    }
+
     return (
         <>
-
             <View style={styles.container}>
 
                 <View style={styles.inner_container}>
-                <View style={styles.card}>
+                   <TouchableOpacity onPress={Productcard}>
+                   <View style={styles.card}>
                         <View style={styles.card_img}></View>
                         <View style={styles.textbox}>
                             <View>
@@ -22,6 +27,7 @@ const Cards = () => {
                             <View style={styles.btn}><TouchableOpacity><Image source={heart}></Image></TouchableOpacity></View>
                         </View>
                     </View>
+                   </TouchableOpacity>
                     <View style={styles.card}>
                         <View style={styles.card_img}></View>
                         <View style={styles.textbox}>
@@ -50,7 +56,6 @@ const Cards = () => {
     )
 }
 
-export default Cards
 
 const styles = StyleSheet.create({
     inner_container: {
@@ -80,10 +85,10 @@ const styles = StyleSheet.create({
     textbox: {
         padding: w * .02,
         flexDirection: 'row',
-        
+
     },
-    btn:{
-        marginHorizontal:w*.02,
-       
+    btn: {
+        marginHorizontal: w * .02,
+
     }
 })

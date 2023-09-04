@@ -18,13 +18,16 @@ import robot from '../images/logos/robot.png'
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Workinfocard() {
+export default function Workinfocard({navigation}) {
+    function Backbutton(){
+        navigation.goBack()
+    }
     return (
         <>
             <View style={styles.container}>
                 <View style={styles.topview}>
                     <View style={styles.iconsview}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={Backbutton}>
                             <View style={styles.arrowview}>
                                 <Image source={arrow} style={styles.arrowimage} />
                             </View>

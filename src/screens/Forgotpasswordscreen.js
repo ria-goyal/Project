@@ -15,11 +15,19 @@ import arrow from '../images/logos/arrow.png';
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Forgotpassword() {
+export default function Forgotpassword({navigation}) {
+
+    function Verification(){
+        alert("enter otp" )
+        navigation.navigate('verification')
+      }
+      function Backbutton(){
+        navigation.goBack()
+    }
     return (
         <>
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={Backbutton}>
                     <View source={arrow} style={styles.arrowview}>
                         <Image source={arrow} style={styles.arrow} />
                     </View>
@@ -38,7 +46,7 @@ export default function Forgotpassword() {
                     <TextInput placeholder='Enter Number' style={styles.inputtext} />
                 </View>
                 <View style={styles.sendview}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={Verification}>
                         <View style={styles.sendbtn}>
                             <Text style={styles.sendbtntext}>SEND</Text>
                         </View>

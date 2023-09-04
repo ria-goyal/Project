@@ -13,7 +13,24 @@ import robot from '../images/logos/robot.png';
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Login() {
+export default function Login({navigation}) {
+
+  function Registerpage(){
+    // navigation.navigate('productcard')
+    alert('Register now')
+    navigation.navigate('register')
+}
+
+function Homepage(){
+  alert('Login Successfull')
+  navigation.goBack()
+}
+
+function Forgotpassword(){
+  alert("Don't worry" )
+  navigation.navigate('forgotpassword')
+}
+
   return (
     <>
       <View style={styles.container}>
@@ -34,14 +51,14 @@ export default function Login() {
           </View>
         </View>
         <View style={styles.loginview}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={Homepage}>
             <View style={styles.loginbtn}>
               <Text style={styles.loginbtntext}>LOGIN</Text>
             </View>
           </TouchableOpacity>
         </View>
         <View style={styles.forgetview}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={Forgotpassword}>
             <Text style={styles.forgettext}>Forgot your password?</Text>
           </TouchableOpacity>
         </View>
@@ -50,7 +67,7 @@ export default function Login() {
           <View>
             <Text style={styles.signuptext}>Not a member?</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={Registerpage}>
             <Text style={styles.signuptext1}>Create Acoount</Text>
           </TouchableOpacity>
         </View>
