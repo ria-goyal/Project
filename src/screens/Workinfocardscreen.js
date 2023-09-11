@@ -1,4 +1,4 @@
-import React from 'react';
+import React,  { useContext, useEffect, useState, } from 'react';
 import {
     Text,
     View,
@@ -14,11 +14,25 @@ import heart from '../images/logos/heart.png';
 import email from '../images/logos/email.png';
 import phone from '../images/logos/phone.png';
 import robot from '../images/logos/robot.png'
+import { ContextAuth } from '../Context/Context';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Workinfocard({navigation}) {
+export default function Workinfocard({navigation,route}) {
+
+    const data = useContext(ContextAuth)
+    const [work,setwork]=useState(route.params)
+    const [contact,setcontact]=useState('')
+    
+    console.log("contact*****************",contact);
+    console.log("route*****************",route);
+    useEffect(()=>{
+        const {contactdetails} = data
+        setcontact(contactdetails)
+        setwork(route.params)
+      },[])
+
     function Backbutton(){
         navigation.goBack()
     }
@@ -50,14 +64,14 @@ export default function Workinfocard({navigation}) {
                 <View style={styles.detailsview}>
                     <View style={styles.detailstopview}>
                         <View>
-                            <Text style={styles.detailstopleft}>Name:</Text>
+                            <Text style={styles.detailstopleft}>Name:{work.work_name}</Text>
                         </View>
                         <View >
-                            <Text style={styles.detailstopright}>Paid Work:</Text>
+                            <Text style={styles.detailstopright}>Paid Work:{work.offer_rate}</Text>
                         </View>
                     </View>
                     <View style={styles.detailsbottomview}>
-                        <Text style={styles.detailsbottomtext}>Requirements:</Text>
+                        <Text style={styles.detailsbottomtext}>Requirements:{work.requirement}</Text>
                     </View>
                 </View>
                 <View style={styles.line1}></View>
@@ -77,7 +91,7 @@ export default function Workinfocard({navigation}) {
                     <View style={styles.contactdetail}>
                         <View style={styles.phonedetail}>
                             <Image source={phone} style={styles.phoneimage} />
-                            <Text style={styles.phonetext}>0123456789</Text>
+                            <Text style={styles.phonetext}>{contact.p_number}</Text>
                         </View>
                         <View style={styles.emaildetail}>
                             <Image source={email} style={styles.emailimage} />

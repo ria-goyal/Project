@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,  { useContext, useEffect, useState, } from 'react';
 import {
     Text,
     View,
@@ -15,16 +15,29 @@ import email from '../images/logos/email.png';
 import phone from '../images/logos/phone.png';
 import ImageSliderComponent from '../component/Imageslidercomponent';
 import { hr_bar_b } from '../global/style';
+import { ContextAuth } from '../Context/Context';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Productinfocard({navigation}) {
+export default function Productinfocard({navigation,route}) {
+    
+     console.log("product me kya eh **********************8",contact)
+    const data = useContext(ContextAuth)
+    const [product,setproduct]=useState(route.params)
+    const [contact,setcontact]=useState('')
+    
+    useEffect(()=>{
+        const {contactdetails} = data
+        setcontact(contactdetails)
+        setproduct(route.params)
+      },[])
     function Backbutton(){
         navigation.goBack()
     }
-    return (
-        <>
+    return ( 
+        <>{
+        }
             <View style={styles.container}>
                 <View style={styles.topview}>
                     <View style={styles.iconsview}>
@@ -45,7 +58,7 @@ export default function Productinfocard({navigation}) {
                     <View style={styles.detailsview}>
                         <View style={styles.detailstopview}>
                             <View>
-                                <Text style={styles.detailstext}>Product Name:</Text>
+                                <Text style={styles.detailstext}>Product Name:{product.product_name}</Text>
                             </View>
                             <TouchableOpacity>
                                 <View>
@@ -53,15 +66,15 @@ export default function Productinfocard({navigation}) {
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.detailsbottomview}>
+                        {/* <View style={styles.detailsbottomview}>
                             <Text style={styles.detailstext}>Category:</Text>
-                        </View>
+                        </View> */}
                         <View style={styles.detailsbottomview}>
-                            <Text style={styles.detailstext}>Rate:</Text>
+                            <Text style={styles.detailstext}>Rate:{product.product_rate}</Text>
                         </View>
-                        <View style={styles.detailsbottomview}>
+                        {/* <View style={styles.detailsbottomview}>
                             <Text style={styles.detailstext}>Brand:</Text>
-                        </View>
+                        </View> */}
                     </View>
                     <View style={hr_bar_b}></View>
                     <View style={styles.descriptionview}>
@@ -80,7 +93,7 @@ export default function Productinfocard({navigation}) {
                         <View style={styles.contactdetail}>
                             <View style={styles.phonedetail}>
                                 <Image source={phone} style={styles.phoneimage} />
-                                <Text style={styles.phonetext}>0123456789</Text>
+                                <Text style={styles.phonetext}>{contact.name}</Text>
                             </View>
                             <View style={styles.emaildetail}>
                                 <Image source={email} style={styles.emailimage} />

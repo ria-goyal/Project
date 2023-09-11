@@ -1,28 +1,43 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
-import React from 'react'
+import React,  { useContext, useEffect, useState, } from 'react'
 import Headercomponent from '../component/Headercomp'
 import Search from '../component/search'
 import { colors } from '../global/style'
 import Corousel from '../component/corousel'
 import Cards from '../component/cards'
 import Bar from '../component/Bar'
+import Bottomnavigation from '../component/Bottomnavigationcomponent'
 import heart from '../images/logos/heart.png'
+import { FlatList, ScrollView } from 'react-native-gesture-handler'
+import { ContextAuth } from '../Context/Context';
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
 
 export default function HomeScreen({ navigation }) {
+  // console.log('details details',productdetails);
 
-  function Productcardshow() {
+  const [product,setproduct]=useState('')
+  const [work,setwork]=useState('')
+  const data = useContext(ContextAuth)
+  
+  useEffect(()=>{
+    const {productdetails,workdetails} = data
+    setproduct(productdetails)
+    setwork(workdetails)
+  },[])
+
+  function Renderproduct(item) {
+  
     return (
       <>
         <View style={styles.inner_container}>
-          <TouchableOpacity onPress={Productcard}>
+          <TouchableOpacity onPress={()=>Productcard(item)}>
             <View style={styles.card}>
               <View style={styles.card_img}></View>
               <View style={styles.textbox}>
                 <View>
-                  <Text style={styles.card_text}>Product Name</Text>
-                  <Text style={styles.card_text}>Rs.100/-</Text>
+                  <Text style={styles.card_text}>{item.product_name}</Text>
+                  <Text style={styles.card_text}>Rs.{item.product_rate}/-</Text>
                 </View>
                 <View style={styles.btn}>
                   <TouchableOpacity>
@@ -36,23 +51,37 @@ export default function HomeScreen({ navigation }) {
       </>
     )
   }
-  function Productcard(){
-    // navigation.navigate('productcard')
-    alert('Login first')
-    navigation.navigate('login')
+  async function Productcard(item){
+    // console.log("**********",item);
+    navigation.navigate('productcard',{...item})
+    // alert('Login first')
+    // navigation.navigate('login')
+  }
+
+function Productcardshow() {
+  return (
+    <>
+    <FlatList
+    numColumns={2}
+    data={product}
+    renderItem={({item})=>Renderproduct(item)}
+    keyExtractor={(one)=>one.key}
+    />
+    </>
+  )
 }
 
-  function Workcardshow() {
+  function Renderwork(item) {
     return (
       <>
         <View style={styles.inner_container}>
-          <TouchableOpacity onPress={Workcard}>
+          <TouchableOpacity onPress={()=>Workcard(item)}>
             <View style={styles.card}>
               <View style={styles.card_img}></View>
               <View style={styles.textbox}>
                 <View>
-                  <Text style={styles.card_text}>Name:</Text>
-                  <Text style={styles.card_text}>Rs.100/-</Text>
+                  <Text style={styles.card_text}>{item.work_name}</Text>
+                  <Text style={styles.card_text}>Rs.{item.offer_rate}/-</Text>
                 </View>
                 <View style={styles.btn}>
                   <TouchableOpacity>
@@ -66,12 +95,24 @@ export default function HomeScreen({ navigation }) {
       </>
     )
   }
-  function Workcard(){
-    // navigation.navigate('workcard')
-    navigation.navigate('login')
-    alert('Login first')
+  function Workcard(item){
+    navigation.navigate('workcard',{...item})
+    // navigation.navigate('login')
+    // alert('Login first')
 }
  
+function Workcardshow() {
+  return (
+    <>
+    <FlatList
+    numColumns={2}
+    data={work}
+    renderItem={({item})=>Renderwork(item)}
+    keyExtractor={(item)=>item.key}
+    />
+    </>
+  )
+}
 
   return (
     <>
@@ -81,10 +122,16 @@ export default function HomeScreen({ navigation }) {
         <Corousel />
         <Bar />
         {/* <Cards/> */}
-       <View style={styles.cards}>
+      <ScrollView>
+      <View style={styles.cards}>
        {Productcardshow()}
+       </View>
+        <Bar />
+      <View style={styles.cards}>
         {Workcardshow()}
        </View>
+      </ScrollView>
+       {/* <Bottomnavigation/> */}
       </View>
     </>
   )
@@ -130,6 +177,6 @@ const styles = StyleSheet.create({
 
   },
 cards:{
-  flexDirection:'row',
+  flexWrap:'wrap'
 }
 })

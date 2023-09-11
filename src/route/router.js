@@ -9,6 +9,7 @@ import Sell from '../screens/Sell'
 import Freelance from '../screens/Freelance'
 import Productedit from '../screens/Producteditscreen'
 import Workedit from '../screens/Workeditscreen'
+
 import Startscreen from '../screens/Startscreen'
 import HomeScreen from '../screens/HomeScreen'
 import Productinfocard from '../screens/Productinfocardscreen'
@@ -23,7 +24,7 @@ const Stack = createStackNavigator();
 export default function Router() {
     return (
         <>
-            <NavigationContainer>
+            <NavigationContainer initialRouteName="start">
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="start" component={Startscreen} />
                     <Stack.Screen name="home" component={HomeScreen} />
