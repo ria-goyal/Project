@@ -5,6 +5,8 @@ import Router from './src/route/Router'
 import {ContextAuth} from './src/Context/Context'
 import {productdetails,workdetails,contactdetails} from './src/Data/Data'
 
+
+
 export default function App(){
 
     const data ={
@@ -14,5 +16,6 @@ export default function App(){
         <ContextAuth.Provider value={data}>
         <Router/>
  </ContextAuth.Provider>
+      
     )
 } 
