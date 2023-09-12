@@ -10,14 +10,10 @@ import Bar from '../component/Bar'
 import heart from '../images/logos/heart.png'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { ContextAuth } from '../Context/Context';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Account from '../screens/Account'
-import Sell from '../screens/Sell'
-import Freelance from '../screens/Freelance'
 import { NavigationContainer } from '@react-navigation/native'
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
-const tab = createBottomTabNavigator();
+
 
 export default function HomeScreen({ navigation }) {
   // console.log('details details',productdetails);
@@ -122,21 +118,6 @@ function Workcardshow() {
   return (
     <>
 
-
-<tab.Navigator
-initialRouteName='home'
-screenOptions={
-    {
-        headerShown:false
-    }
-}>
-    <tab.Screen name='home' component={HomeScreen}/>
-    <tab.Screen name='Sell' component={Sell}/>
-    <tab.Screen name='Freelance' component={Freelance}/>
-    <tab.Screen name='Account' component={Account}/>
-</tab.Navigator>
-
-
       <View style={styles.container}>
         <Headercomponent />
         <Search />
@@ -147,7 +128,7 @@ screenOptions={
       <View style={styles.cards}>
        {Productcardshow()}
        </View>
-        <Bar />
+        
       <View style={styles.cards}>
         {Workcardshow()}
        </View>

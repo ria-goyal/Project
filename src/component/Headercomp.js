@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet,Text,Image,Dimensions,View, useWindowDimensions} from 'react-native'
+import {StyleSheet,Text,Image,Dimensions,View, useWindowDimensions,TouchableOpacity} from 'react-native'
 const w= Dimensions.get('window').width
 const h= Dimensions.get('window').height
 import review from '../images/logos/review.png'
@@ -12,7 +12,7 @@ export default function Headercomponent(){
             <View style={style.left_con}><Text style={style.logo}>Shoppie!</Text></View>
             <View style={style.right_con}>
                 <View style={style.img_out}><Image source={location}/></View>
-                <View style={style.img_out}><Image source={review}/></View>
+                <TouchableOpacity><View style={style.img_out}><Image source={review}/></View></TouchableOpacity>
             </View>
         </View>
         </>
