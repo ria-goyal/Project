@@ -36,14 +36,8 @@ const Stack = createStackNavigator();
                     <Stack.Screen name="register" component={Signupscreen} />
                     <Stack.Screen name="forgotpassword" component={Forgotpassword} />
                     <Stack.Screen name="verification" component={Verificationscreen} />
-                    <Stack.Screen name="newpassword" component={Newpasswordscreen} />
-                    
+                    <Stack.Screen name="newpassword" component={Newpasswordscreen} />      
                 </Stack.Navigator>
-                
-            
-            
-            
-
         </>
     )
 } 

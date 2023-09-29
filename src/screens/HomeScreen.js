@@ -6,7 +6,6 @@ import { colors } from '../global/style'
 import Corousel from '../component/corousel'
 import Cards from '../component/cards'
 import Bar from '../component/Bar'
-// import Bottomnavigation from '../component/Bottomnavigationcomponent'
 import heart from '../images/logos/heart.png'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { ContextAuth } from '../Context/Context';
@@ -121,10 +120,9 @@ function Workcardshow() {
       <View style={styles.container}>
         <Headercomponent />
         <Search />
+      <ScrollView>
         <Corousel />
         <Bar />
-        {/* <Cards/> */}
-      <ScrollView>
       <View style={styles.cards}>
        {Productcardshow()}
        </View>

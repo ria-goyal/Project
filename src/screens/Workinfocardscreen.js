@@ -77,7 +77,7 @@ export default function Workinfocard({navigation,route}) {
                 <View style={styles.line1}></View>
                 <View style={styles.descriptionview}>
                     <View style={styles.descriptiontext}>
-                        <Text style={styles.descriptiontext1}>Description:</Text>
+                        <Text style={styles.descriptiontext1}>Description:{work.work_details}</Text>
                     </View>
                 </View>
                 <View style={styles.line1}></View>
@@ -86,16 +86,16 @@ export default function Workinfocard({navigation,route}) {
                         <Text style={styles.contacttext1}>Contact Details:</Text>
                     </View>
                     <View>
-                        <Text style={styles.contacttext2}>Owner Name:</Text>
+                        <Text style={styles.contacttext2}>Owner Name:{work.name}</Text>
                     </View>
                     <View style={styles.contactdetail}>
                         <View style={styles.phonedetail}>
                             <Image source={phone} style={styles.phoneimage} />
-                            <Text style={styles.phonetext}>{contact.p_number}</Text>
+                            <Text style={styles.phonetext}>{work.p_number}</Text>
                         </View>
                         <View style={styles.emaildetail}>
                             <Image source={email} style={styles.emailimage} />
-                            <Text style={styles.emailtext}>training@gmail.com</Text>
+                            <Text style={styles.emailtext}>{work.e_mail}</Text>
                         </View>
                     </View>
                 </View>

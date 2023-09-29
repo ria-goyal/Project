@@ -36,8 +36,7 @@ export default function Productinfocard({navigation,route}) {
         navigation.goBack()
     }
     return ( 
-        <>{
-        }
+        <>
             <View style={styles.container}>
                 <View style={styles.topview}>
                     <View style={styles.iconsview}>
@@ -79,7 +78,7 @@ export default function Productinfocard({navigation,route}) {
                     <View style={hr_bar_b}></View>
                     <View style={styles.descriptionview}>
                         <View style={styles.descriptiontext}>
-                            <Text style={styles.descriptiontext1}>Description:</Text>
+                            <Text style={styles.descriptiontext1}>Description:{product.product_details}</Text>
                         </View>
                     </View>
                     <View style={hr_bar_b}></View>
@@ -88,16 +87,16 @@ export default function Productinfocard({navigation,route}) {
                             <Text style={styles.contacttext1}>Contact Details:</Text>
                         </View>
                         <View>
-                            <Text style={styles.contacttext2}>Owner Name:</Text>
+                            <Text style={styles.contacttext2}>Owner Name:{product.name}</Text>
                         </View>
                         <View style={styles.contactdetail}>
                             <View style={styles.phonedetail}>
                                 <Image source={phone} style={styles.phoneimage} />
-                                <Text style={styles.phonetext}>{contact.name}</Text>
+                                <Text style={styles.phonetext}>{product.p_number}</Text>
                             </View>
                             <View style={styles.emaildetail}>
                                 <Image source={email} style={styles.emailimage} />
-                                <Text style={styles.emailtext}>training@gmail.com</Text>
+                                <Text style={styles.emailtext}>{product.e_mail}</Text>
                             </View>
                         </View>
                     </View>
