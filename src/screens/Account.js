@@ -6,8 +6,20 @@ import pic from '../images/images/p1.jpeg'
 import del from '../images/logos/delete.png'
 import heart from '../images/logos/heart.png'
 import {hr_bar,colors,heading} from '../global/style'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const Account = () => {
+const Account = (navigation) => {
+
+    async function Logout(){
+        try {
+            await AsyncStorage.setItem('Email', '');
+            await AsyncStorage.setItem('Pass', '');
+            alert('Logout successfully')
+          }
+          catch (e) {
+            console.log(e);
+          }
+    }
     return (
         <>
             <View style={styles.container}>
@@ -36,6 +48,11 @@ const Account = () => {
                             <Image source={del} />
                         </View>
                     </View>
+                </View>
+                <View style={styles.logoutview}>
+                   <TouchableOpacity style={styles.logoutbtn} onPress={Logout}>
+                   <Text>LOG OUT</Text>
+                   </TouchableOpacity>
                 </View>
             </View>
         </>
@@ -113,5 +130,16 @@ const styles = StyleSheet.create({
     edit_btn_text:{
         color:'#1F4FBE',
         fontSize:16
+    },
+    logoutview:{
+        alignItems:'center',
+        marginTop:50
+    },
+    logoutbtn:{
+        alignItems:'center',
+        justifyContent:'center',
+        height:40,
+        backgroundColor:'red',
+        width:80
     }
 })

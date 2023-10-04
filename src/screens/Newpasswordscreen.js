@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
     Text,
     View,
@@ -11,15 +11,36 @@ import {
 
 import robot from '../images/logos/robot.png';
 import arrow from '../images/logos/arrow.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
 export default function Newpassword({navigation}) {
 
-    function Resetpassword(){
-        alert("password changed successfully" )
-        navigation.navigate('login')
+    const [pass,setpass] = useState('')
+    const [cpass,setcpass] = useState('')
+
+    async function Resetpassword(){
+        try {
+            await AsyncStorage.setItem('Newpass', pass);
+            if (pass !== null && pass !== undefined && pass !== '' && cpass !== null && cpass !== undefined && cpass !== '') {
+                if (pass === cpass) {
+                    navigation.navigate('login')
+                    alert("password changed successfully" )
+                }
+                else {
+                    alert("New password and Confirm password should be same" )
+                }
+            } 
+            else{
+                alert("Enter Password correctlly" )
+            }
+           
+          }
+          catch (e) {
+            console.log(e);
+          }
       }
       function Backbutton(){
         navigation.goBack()
@@ -43,10 +64,10 @@ export default function Newpassword({navigation}) {
                     <Text style={styles.passwordtext1}>previously used password</Text>
                 </View>
                 <View>
-                    <TextInput placeholder='New Password' style={styles.inputtext} />
+                    <TextInput value={pass} onChangeText={(d)=>setpass(d)} placeholder='New Password' style={styles.inputtext} />
                 </View>
                 <View>
-                    <TextInput placeholder='Confirm Password' style={styles.inputtext} />
+                    <TextInput value={cpass} onChangeText={(d)=>setcpass(d)} placeholder='Confirm Password' style={styles.inputtext} />
                 </View>
                 <View style={styles.sendview}>
                     <TouchableOpacity onPress={Resetpassword}>

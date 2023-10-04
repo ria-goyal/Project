@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -8,28 +8,58 @@ import {
   Image,
   TextInput,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import robot from '../images/logos/robot.png';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
 
-  function Registerpage(){
+  const [email, setemail] = useState('')
+  const [pass, setpass] = useState('')
+
+  async function SaveEmailPass() {
+    try {
+      await AsyncStorage.setItem('Email', email);
+      await AsyncStorage.setItem('Pass', pass);
+      Homepage();
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+  
+  function Registerpage() {
     // navigation.navigate('productcard')
     alert('Register now')
     navigation.navigate('register')
-}
+  }
+  
+  async function Homepage() {
+    const newpass = await AsyncStorage.getItem('Newpass')
+    const email = await AsyncStorage.getItem('Email')
+    const pass = await AsyncStorage.getItem('Pass')
+    if (email !== null && email !== undefined && email !== '') {
+      if (pass !== null && pass !== undefined && pass !== '') {
+        if (pass === newpass) {
+          alert('Login Successfull')
+          navigation.goBack()
+        }
+        else{
+          alert('Enter Password correctlly')
+        }
+      }
+    }
+    else {
+      alert('Enter Email and Password correctly') 
+    }
+  }
 
-function Homepage(){
-  alert('Login Successfull')
-  navigation.goBack()
-}
-
-function Forgotpassword(){
-  alert("Don't worry" )
-  navigation.navigate('forgotpassword')
-}
+  function Forgotpassword() {
+    alert("Don't worry")
+    navigation.navigate('forgotpassword')
+  }
 
   return (
     <>
@@ -44,14 +74,14 @@ function Forgotpassword(){
         </View>
         <View style={styles.inputview}>
           <View>
-            <TextInput placeholder="User Name" style={styles.inputtext} />
+            <TextInput value={email} onChangeText={(d) => setemail(d)} placeholder="User Name" style={styles.inputtext} />
           </View>
           <View>
-            <TextInput placeholder="Enter Password" style={styles.inputtext} />
+            <TextInput value={pass} onChangeText={(d) => setpass(d)} placeholder="Enter Password" style={styles.inputtext} />
           </View>
         </View>
         <View style={styles.loginview}>
-          <TouchableOpacity onPress={Homepage}>
+          <TouchableOpacity onPress={SaveEmailPass}>
             <View style={styles.loginbtn}>
               <Text style={styles.loginbtntext}>LOGIN</Text>
             </View>

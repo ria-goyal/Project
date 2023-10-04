@@ -15,8 +15,7 @@ const w = Dimensions.get('window').width;
 export default function Startscreen({navigation}) {
 
   function Startapp(){
-    navigation.navigate('home')
-    
+    navigation.navigate('home')  
 }
   return (
     <>
