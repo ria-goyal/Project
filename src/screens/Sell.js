@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Dimensions,
 import React, { useState, } from 'react'
 import { heading, colors } from '../global/style'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { ProductPostrequest } from '../Data/ProductAPI'
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
 
@@ -13,18 +14,45 @@ export default function Sell() {
   const [Price, setPrice] = useState('')
   const [Bname, setBname] = useState('')
   const [Description, setDescription] = useState('')
-  const [Cdetails, setCdetails] = useState('')
-  const [galleryimage, setgalleryimage] = useState(null)
-  const [cameraimage, setcameraimage] = useState(null)
+  const [email, setemail] = useState('')
+  const [Cnumber, setCnumber] = useState('')
+  const [Cname, setCname] = useState('')
+  const [gimage, setgalleryimage] = useState('')
+  const [cimage, setcameraimage] = useState('')
 
-  function Post() {
+ async function Post() {
+
+  const params ={
+    "p_name":Pname,
+    "p_rate":Price,
+    "p_brand":Bname,
+    "p_des":Description,
+    "c_name":Cname,
+    "c_number":Cnumber,
+    "e_mail":email,
+    "G_img":gimage,
+    "C_img":cimage
+  }
+
+  await ProductPostrequest( params).then(res => {
+    console.log(res.data);
+    console.log("product ka data he", params);
+  })
+    .catch(error => {
+      console.log(error);
+    })
+
     setPress(!Press)
     setPname('')
     setCategory('')
     setPrice('')
     setBname('')
     setDescription('')
-    setCdetails('')
+    setemail('')
+    setCname('')
+    setCnumber('')
+    setgalleryimage('')
+    setcameraimage('')
   }
 
   const Galleryphoto = () => {
@@ -70,7 +98,9 @@ export default function Sell() {
           <TextInput value={Price} onChangeText={(d) => setPrice(d)} placeholder='Price offerred' placeholderTextColor={'black'} style={styles.input_box} />
           <TextInput value={Bname} onChangeText={(d) => setBname(d)} placeholder='Brand(If any)' placeholderTextColor={'black'} style={styles.input_box} />
           <TextInput value={Description} onChangeText={(d) => setDescription(d)} placeholder='Description' placeholderTextColor={'black'} style={styles.input_box} />
-          <TextInput value={Cdetails} onChangeText={(d) => setCdetails(d)} placeholder='Contact details' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={Cname} onChangeText={(d) => setCname(d)} placeholder='name' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={Cnumber} onChangeText={(d) => setCnumber(d)} placeholder='number' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={email} onChangeText={(d) => setemail(d)} placeholder='email' placeholderTextColor={'black'} style={styles.input_box} />
           <View style={styles.upload_imageview}>
             <TouchableOpacity style={styles.upload_image_camera} onPress={() => Cameraphoto()}>
               <Text>
@@ -84,8 +114,8 @@ export default function Sell() {
             </TouchableOpacity>
           </View>
           <View style={styles.image_camera_view}>
-            <Image source={{ uri: galleryimage }} style={styles.image_camera} />
-            <Image source={{ uri: cameraimage }} style={styles.image_camera} />
+            <Image source={{ uri: gimage }} style={styles.image_camera} />
+            <Image source={{ uri: cimage }} style={styles.image_camera} />
           </View>
           <TouchableOpacity style={Press ? styles.btn : styles.btn1} onPress={Post} ><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
         </View>

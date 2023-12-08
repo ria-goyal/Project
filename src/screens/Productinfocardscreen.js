@@ -57,7 +57,7 @@ export default function Productinfocard({navigation,route}) {
                     <View style={styles.detailsview}>
                         <View style={styles.detailstopview}>
                             <View>
-                                <Text style={styles.detailstext}>Product Name:{product.product_name}</Text>
+                                <Text style={styles.detailstext}>Product Name:{product.p_name}</Text>
                             </View>
                             <TouchableOpacity>
                                 <View>
@@ -69,7 +69,7 @@ export default function Productinfocard({navigation,route}) {
                             <Text style={styles.detailstext}>Category:</Text>
                         </View> */}
                         <View style={styles.detailsbottomview}>
-                            <Text style={styles.detailstext}>Rate:{product.product_rate}</Text>
+                            <Text style={styles.detailstext}>Rate:{product.p_rate}</Text>
                         </View>
                         {/* <View style={styles.detailsbottomview}>
                             <Text style={styles.detailstext}>Brand:</Text>
@@ -78,7 +78,7 @@ export default function Productinfocard({navigation,route}) {
                     <View style={hr_bar_b}></View>
                     <View style={styles.descriptionview}>
                         <View style={styles.descriptiontext}>
-                            <Text style={styles.descriptiontext1}>Description:{product.product_details}</Text>
+                            <Text style={styles.descriptiontext1}>Description:{product.p_des}</Text>
                         </View>
                     </View>
                     <View style={hr_bar_b}></View>
@@ -87,12 +87,12 @@ export default function Productinfocard({navigation,route}) {
                             <Text style={styles.contacttext1}>Contact Details:</Text>
                         </View>
                         <View>
-                            <Text style={styles.contacttext2}>Owner Name:{product.name}</Text>
+                            <Text style={styles.contacttext2}>Owner Name:{product.c_name}</Text>
                         </View>
                         <View style={styles.contactdetail}>
                             <View style={styles.phonedetail}>
                                 <Image source={phone} style={styles.phoneimage} />
-                                <Text style={styles.phonetext}>{product.p_number}</Text>
+                                <Text style={styles.phonetext}>{product.c_number}</Text>
                             </View>
                             <View style={styles.emaildetail}>
                                 <Image source={email} style={styles.emailimage} />

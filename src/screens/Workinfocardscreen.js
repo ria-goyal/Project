@@ -64,20 +64,20 @@ export default function Workinfocard({navigation,route}) {
                 <View style={styles.detailsview}>
                     <View style={styles.detailstopview}>
                         <View>
-                            <Text style={styles.detailstopleft}>Name:{work.work_name}</Text>
+                            <Text style={styles.detailstopleft}>Name:{work.w_name}</Text>
                         </View>
                         <View >
-                            <Text style={styles.detailstopright}>Paid Work:{work.offer_rate}</Text>
+                            <Text style={styles.detailstopright}>Paid Work:{work.w_rate}</Text>
                         </View>
                     </View>
                     <View style={styles.detailsbottomview}>
-                        <Text style={styles.detailsbottomtext}>Requirements:{work.requirement}</Text>
+                        <Text style={styles.detailsbottomtext}>Requirements:{work.w_req}</Text>
                     </View>
                 </View>
                 <View style={styles.line1}></View>
                 <View style={styles.descriptionview}>
                     <View style={styles.descriptiontext}>
-                        <Text style={styles.descriptiontext1}>Description:{work.work_details}</Text>
+                        <Text style={styles.descriptiontext1}>Description:{work.w_des}</Text>
                     </View>
                 </View>
                 <View style={styles.line1}></View>
@@ -86,12 +86,12 @@ export default function Workinfocard({navigation,route}) {
                         <Text style={styles.contacttext1}>Contact Details:</Text>
                     </View>
                     <View>
-                        <Text style={styles.contacttext2}>Owner Name:{work.name}</Text>
+                        <Text style={styles.contacttext2}>Owner Name:{work.c_name}</Text>
                     </View>
                     <View style={styles.contactdetail}>
                         <View style={styles.phonedetail}>
                             <Image source={phone} style={styles.phoneimage} />
-                            <Text style={styles.phonetext}>{work.p_number}</Text>
+                            <Text style={styles.phonetext}>{work.c_number}</Text>
                         </View>
                         <View style={styles.emaildetail}>
                             <Image source={email} style={styles.emailimage} />

@@ -10,8 +10,8 @@ import { FlatList, } from 'react-native-gesture-handler'
 import { ContextAuth } from '../Context/Context';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ScrollView } from 'react-native-virtualized-view'
-// import axios from 'axios'
-// import { Getrequest } from '../Data/APIdata'
+import { WorkGetrequest } from '../Data/WorkAPI'
+import { ProductGetrequest } from '../Data/ProductAPI'
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
 
@@ -19,23 +19,31 @@ export default function HomeScreen({ navigation }) {
   const [product, setproduct] = useState('')
   const [work, setwork] = useState('')
   const data = useContext(ContextAuth)
-  const { productdetails, workdetails } = data
 
-  // const getworkAPIdata = async ()=>{
-  //    await Getrequest().then(res =>{
-  //     console.log(res.data);
-  //     setwork(res.data)
-  //    })
-  //    .catch(error =>{
-  //     console.log(error);
-  //    })
-  //    console.log("work ka data he",work);
-  // }
+  const getworkAPIdata = async ()=>{
+     await WorkGetrequest().then(res =>{
+      console.log(res.data);
+      setwork(res.data)
+     })
+     .catch(error =>{
+      console.log(error);
+     })
+     console.log("work ka data he",work);
+  }
+  const getproductAPIdata = async ()=>{
+     await ProductGetrequest().then(res =>{
+      console.log(res.data);
+      setproduct(res.data)
+     })
+     .catch(error =>{
+      console.log(error);
+     })
+     console.log("product ka data he",product);
+  }
   
   useEffect(() => {
-    setproduct(productdetails)
-    setwork(workdetails)
-    // getworkAPIdata();
+    getworkAPIdata();
+    getproductAPIdata();
   },[])
 
   function Renderproduct(item) {
@@ -64,16 +72,16 @@ export default function HomeScreen({ navigation }) {
   }
   async function Productcard(item) {
     // console.log("**********",item);
-    // const email = await AsyncStorage.getItem('Email');
-    // const pass = await AsyncStorage.getItem('Pass');
-    // console.log('email ka data btao', email);
-    // if (email !== null && email !== undefined && email !== '' && pass !== null && pass !== undefined && pass !== '') {
+    const email = await AsyncStorage.getItem('Email');
+    const pass = await AsyncStorage.getItem('Pass');
+    console.log('email ka data btao', email);
+    if (email !== null && email !== undefined && email !== '' && pass !== null && pass !== undefined && pass !== '') {
       navigation.navigate('productcard', { ...item })
-    // }
-    // else {
-      // alert('Login first')
-      // navigation.navigate('login')
-    // }
+    }
+    else {
+      alert('Login first')
+      navigation.navigate('login')
+    }
   }
 
   function Productcardshow() {

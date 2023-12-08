@@ -12,8 +12,8 @@ const Account = (navigation) => {
 
     async function Logout(){
         try {
-            // await AsyncStorage.setItem('Email', '');
-            // await AsyncStorage.setItem('Pass', '');
+            await AsyncStorage.setItem('Email', '');
+            await AsyncStorage.setItem('Pass', '');
             alert('Logout successfully')
           }
           catch (e) {

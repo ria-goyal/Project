@@ -1,38 +1,67 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Dimensions, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { heading, colors } from '../global/style'
+import { WorkPostrequest } from '../Data/WorkAPI'
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
 
 export default function Freelance() {
 
   const [Press, setPress] = useState(false)
-  const [name, setname] = useState('')
+  const [wname, setname] = useState('')
   const [Requirements, setRequirements] = useState('')
   const [Price, setPrice] = useState('')
   const [Description, setDescription] = useState('')
-  const [Cdetails, setCdetails] = useState('')
+  const [email, setemail] = useState('')
+  const [Cnumber, setCnumber] = useState('')
+  const [Cname, setCname] = useState('')
 
-  function Post() {
+  async function Post() {
+
+    const params = {
+      "w_name": wname,
+      "w_req": Requirements,
+      "w_rate": Price,
+      "w_des": Description,
+      "c_name": Cname,
+      "c_number": Cnumber,
+      "e_mail": email
+    }
+
+    await WorkPostrequest( params).then(res => {
+      console.log(res.data);
+      console.log("work ka data he", params);
+    })
+      .catch(error => {
+        console.log(error);
+      })
+
     setPress(!Press)
     setname('')
     setRequirements('')
     setPrice('')
     setDescription('')
-    setCdetails('')
+    setemail('')
+    setCname('')
+    setCnumber('')
   }
+
 
   return (
     <View style={styles.container}>
       <View ><Text style={heading}>Enter Details</Text></View>
-      <View style={styles.form}>
-        <TextInput value={name} onChangeText={(d) => setname(d)} placeholder='Your Name' placeholderTextColor={'black'} style={styles.input_box} />
-        <TextInput value={Requirements} onChangeText={(d) => setRequirements(d)} placeholder='Requirements' placeholderTextColor={'black'} style={styles.input_box} />
-        <TextInput value={Price} onChangeText={(d) => setPrice(d)} placeholder='Price offerred' placeholderTextColor={'black'} style={styles.input_box} />
-        <TextInput value={Description} onChangeText={(d) => setDescription(d)} placeholder='Description (About the work)' placeholderTextColor={'black'} style={styles.input_box} />
-        <TextInput value={Cdetails} onChangeText={(d) => setCdetails(d)} placeholder='Contact details' placeholderTextColor={'black'} style={styles.input_box} />
-        <TouchableOpacity style={Press ? styles.btn : styles.btn1} onPress={Post}><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
-      </View>
+      <ScrollView>
+        <View style={styles.form}>
+          <TextInput value={wname} onChangeText={(d) => setname(d)} placeholder='Your Name' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={Requirements} onChangeText={(d) => setRequirements(d)} placeholder='Requirements' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={Price} onChangeText={(d) => setPrice(d)} placeholder='Price offerred' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={Description} onChangeText={(d) => setDescription(d)} placeholder='Description (About the work)' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={Cname} onChangeText={(d) => setCname(d)} placeholder='name' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={Cnumber} onChangeText={(d) => setCnumber(d)} placeholder='number' placeholderTextColor={'black'} style={styles.input_box} />
+          <TextInput value={email} onChangeText={(d) => setemail(d)} placeholder='email' placeholderTextColor={'black'} style={styles.input_box} />
+          <TouchableOpacity style={Press ? styles.btn : styles.btn1} onPress={Post}><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   )
 }

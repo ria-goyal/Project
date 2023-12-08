@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
   }
   
   function Registerpage() {
-    // navigation.navigate('productcard')
+    // navigation.navigate('productcard') 
     alert('Register now')
     navigation.navigate('register')
   }
