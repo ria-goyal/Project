@@ -1,3 +1,4 @@
+// <===================================================================Import-Section-Start===================================================================================>
 import React, { useState } from 'react';
 import {
   Text,
@@ -8,14 +9,19 @@ import {
   Image,
   TextInput,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import robot from '../images/logos/robot.png';
-
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
+// <===================================================================Import-Section-End===================================================================================>
 
+
+
+// <===================================================================Logic-Section-Start===================================================================================>
 export default function Signup({ navigation }) {
 
+  const [msg, setmsg] = useState('')
   const [username, setusername] = useState('')
   const [email, setemail] = useState('')
   const [pass, setpass] = useState('')
@@ -24,35 +30,36 @@ export default function Signup({ navigation }) {
   async function Signuppage() {
     try {
       await AsyncStorage.setItem('Username', username);
-      await AsyncStorage.setItem('Email', email);
-      await AsyncStorage.setItem('Pass', pass);
-      await AsyncStorage.setItem('Cpass', cpass);
-      check();
+      if (email.length > 0 && pass.length > 5) {
+        if (pass == cpass) {
+          const isUserCreated = await auth().createUserWithEmailAndPassword(email, pass);
+          await auth().currentUser.sendEmailVerification();
+          await auth().signOut();
+          alert("please verify your email click on the link in your inbox");
+          navigation.navigate('login');
+          console.log(isUserCreated);
+        } else {
+          alert("password and confirm password should be same")
+        }
+      } else {
+        alert("enter valid email id and password should be atleast of 6 characters")
+      }
     }
     catch (e) {
-      console.log(e);
+      console.log(e.message);
+      const errormsg = e.message.replace(/\[.*?\]/, '');
+      setmsg(errormsg)
     }
   }
 
- async function check(){
-    const uname = await AsyncStorage.getItem('Username')
-    const uemail = await AsyncStorage.getItem('Email')
-    const upass = await AsyncStorage.getItem('Pass')
-    const cpass = await AsyncStorage.getItem('Cpass')
-
-    if (uname !== null && uname !== undefined && uname !== '' && uemail !== null && uemail !== undefined && uemail !== '' && upass !== null && upass !== undefined && upass !== '' && cpass !== null && cpass !== undefined && cpass !== '') {
-      navigation.navigate('login')
-      alert('User Registered Successfully')
-    }
-    else{
-      alert('Enter all the details first')
-    }
-  }
-
-  function Loginpage(){
+  function Loginpage() {
     navigation.navigate('login')
   }
+  // <===================================================================Logic-Section-End===================================================================================>
 
+
+
+  // <===================================================================Frontend-Section-Start===================================================================================>
   return (
     <>
       <View style={styles.container}>
@@ -78,6 +85,7 @@ export default function Signup({ navigation }) {
             <TextInput value={cpass} onChangeText={(d) => setcpass(d)} placeholder='Confirm Password' style={styles.inputtext} />
           </View>
         </View>
+        <Text>{msg}</Text>
         <View style={styles.signupview}>
           <TouchableOpacity onPress={Signuppage}>
             <View style={styles.signupbtn}>
@@ -204,3 +212,5 @@ const styles = StyleSheet.create({
   //   marginLeft:2
   // }
 });
+// <===================================================================Frontend-Section-End===================================================================================>
+

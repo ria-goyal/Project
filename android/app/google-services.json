@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "481808101355",
-    "project_id": "shopping-app-9907b",
-    "storage_bucket": "shopping-app-9907b.appspot.com"
+    "project_number": "539786427917",
+    "project_id": "android-project-93b3c",
+    "storage_bucket": "android-project-93b3c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:481808101355:android:d3a87f08ecc9af0f5eb3ae",
+        "mobilesdk_app_id": "1:539786427917:android:3bfbdfcc9fbb302b4d5f44",
         "android_client_info": {
           "package_name": "com.firstproject"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBQ_ySBQODdxxzGpvHPoh_b8qP-hY5uRwk"
+          "current_key": "AIzaSyBAq22WnFkgczaLM35PqNEYiq0Aoty5d7E"
         }
       ],
       "services": {

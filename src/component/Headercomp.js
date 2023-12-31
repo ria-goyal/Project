@@ -9,7 +9,7 @@ export default function Headercomponent(){
     return(
         <>
         <View style={style.container}>
-            <View style={style.left_con}><Text style={style.logo}>Shoppie!</Text></View>
+            <View style={style.left_con}><Text style={style.logo}>ReviveX!</Text></View>
             <View style={style.right_con}>
                 <View style={style.img_out}><Image source={location}/></View>
                 <TouchableOpacity><View style={style.img_out}><Image source={review}/></View></TouchableOpacity>

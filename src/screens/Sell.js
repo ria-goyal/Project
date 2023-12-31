@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Dimensions, ScrollView, PermissionsAndroid } from 'react-native'
+// <===================================================================Import-Section-Start===================================================================================>
+
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Dimensions, ScrollView, PermissionsAndroid, RefreshControl } from 'react-native'
 import React, { useState, } from 'react'
 import { heading, colors } from '../global/style'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { ProductPostrequest } from '../Data/ProductAPI'
+import { ProductDeleteNotification } from '../Notifications/Notifications'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
+// <===================================================================Import-Section-End===================================================================================>
 
+
+
+// <===================================================================Logic-Section-Start===================================================================================>
 export default function Sell() {
 
   const [Press, setPress] = useState(false)
@@ -17,42 +25,48 @@ export default function Sell() {
   const [email, setemail] = useState('')
   const [Cnumber, setCnumber] = useState('')
   const [Cname, setCname] = useState('')
-  const [gimage, setgalleryimage] = useState('')
-  const [cimage, setcameraimage] = useState('')
+  const [gimage, setgalleryimage] = useState(null)
+  const [cimage, setcameraimage] = useState(null)
 
- async function Post() {
+  async function Post() {
 
-  const params ={
-    "p_name":Pname,
-    "p_rate":Price,
-    "p_brand":Bname,
-    "p_des":Description,
-    "c_name":Cname,
-    "c_number":Cnumber,
-    "e_mail":email,
-    "G_img":gimage,
-    "C_img":cimage
-  }
+    const Email = await AsyncStorage.getItem('Email');
+    if (Email == email) {
+      const params = {
+        "p_name": Pname,
+        "p_rate": Price,
+        "p_brand": Bname,
+        "p_des": Description,
+        "c_name": Cname,
+        "c_number": Cnumber,
+        "e_mail": email,
+        "G_img": gimage,
+        "C_img": cimage
+      }
 
-  await ProductPostrequest( params).then(res => {
-    console.log(res.data);
-    console.log("product ka data he", params);
-  })
-    .catch(error => {
-      console.log(error);
-    })
+      await ProductPostrequest(params).then(res => {
+        console.log(res.data);
+        console.log("product ka data he", params);
+        ProductDeleteNotification();
+      })
+        .catch(error => {
+          console.log(error);
+        })
 
-    setPress(!Press)
-    setPname('')
-    setCategory('')
-    setPrice('')
-    setBname('')
-    setDescription('')
-    setemail('')
-    setCname('')
-    setCnumber('')
-    setgalleryimage('')
-    setcameraimage('')
+      setPress(!Press)
+      setPname('')
+      setCategory('')
+      setPrice('')
+      setBname('')
+      setDescription('')
+      setemail('')
+      setCname('')
+      setCnumber('')
+      setgalleryimage(null)
+      setcameraimage(null)
+    } else {
+      alert('entered email should be same as login email')
+    }
   }
 
   const Galleryphoto = () => {
@@ -87,7 +101,11 @@ export default function Sell() {
       }
     });
   };
+  // <===================================================================Logic-Section-End===================================================================================>
 
+
+
+  // <===================================================================Frontend-Section-Start===================================================================================>
   return (
     <View style={styles.container}>
       <View ><Text style={heading}>Enter Product Details</Text></View>
@@ -114,12 +132,12 @@ export default function Sell() {
             </TouchableOpacity>
           </View>
           <View style={styles.image_camera_view}>
-            <Image source={{ uri: gimage }} style={styles.image_camera} />
             <Image source={{ uri: cimage }} style={styles.image_camera} />
+            <Image source={{ uri: gimage }} style={styles.image_camera} />
           </View>
-          <TouchableOpacity style={Press ? styles.btn : styles.btn1} onPress={Post} ><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
         </View>
       </ScrollView>
+      <TouchableOpacity style={Press ? styles.btn : styles.btn1} onPress={Post} ><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
     </View>
   )
 }
@@ -204,3 +222,4 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
 })
+// <===================================================================Frontend-Section-End===================================================================================>

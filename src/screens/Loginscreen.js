@@ -1,3 +1,5 @@
+// <===================================================================Import-Section-Start===================================================================================>
+
 import React, { useState } from 'react';
 import {
   Text,
@@ -9,11 +11,15 @@ import {
   TextInput,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth from '@react-native-firebase/auth';
 import robot from '../images/logos/robot.png';
-
+import { ScheduledNotification, ScheduleduploadNotification, } from '../Notifications/Notifications'
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
+// <===================================================================Import-Section-End===================================================================================>
 
+
+// <===================================================================Logic-Section-Start===================================================================================>
 export default function Login({ navigation }) {
 
   const [email, setemail] = useState('')
@@ -21,46 +27,52 @@ export default function Login({ navigation }) {
 
   async function SaveEmailPass() {
     try {
-      await AsyncStorage.setItem('Email', email);
-      await AsyncStorage.setItem('Pass', pass);
-      Homepage();
+      if (email.length > 0 && pass.length > 5) {
+          const user = await auth().signInWithEmailAndPassword(email, pass);
+          console.log("&&&&&", user);
+          if (user.user.emailVerified) {
+              alert("you are verified!, welcome to ReviveX!!")
+              await AsyncStorage.setItem('Email', email);
+              await AsyncStorage.setItem('Pass', pass);
+              ScheduledNotification();
+              ScheduleduploadNotification();
+              navigation.goBack();
+          } else {
+            alert("you don't have any account register first")
+            navigation.navigate('register')
+          }
+      } else {
+        alert('enter valid email and password of minimum 6 characters ')
+      }
     }
     catch (e) {
       console.log(e);
     }
   }
-  
+
   function Registerpage() {
-    // navigation.navigate('productcard') 
     alert('Register now')
     navigation.navigate('register')
   }
-  
-  async function Homepage() {
-    const newpass = await AsyncStorage.getItem('Newpass')
-    const email = await AsyncStorage.getItem('Email')
-    const pass = await AsyncStorage.getItem('Pass')
-    if (email !== null && email !== undefined && email !== '') {
-      if (pass !== null && pass !== undefined && pass !== '') {
-        if (pass === newpass) {
-          alert('Login Successfull')
-          navigation.goBack()
-        }
-        else{
-          alert('Enter Password correctlly')
-        }
-      }
-    }
-    else {
-      alert('Enter Email and Password correctly') 
+
+  async function Forgotpassword() {
+    const user = auth().currentUser;
+    if (user) {
+      auth().sendPasswordResetEmail(user.email)
+        .then(() => {
+          alert("please check your inbox")
+          console.log("then me ghusa he");
+        })
+        .catch((error) => {
+          console.error('Error sending password reset email:', error);
+        });
     }
   }
+  // <===================================================================Logic-Section-End===================================================================================>
 
-  function Forgotpassword() {
-    alert("Don't worry")
-    navigation.navigate('forgotpassword')
-  }
 
+
+  // <===================================================================Frontend-Section-Start===================================================================================>
   return (
     <>
       <View style={styles.container}>
@@ -208,3 +220,5 @@ const styles = StyleSheet.create({
     color: '#FFC545',
   },
 });
+// <===================================================================Frontend-Section-End===================================================================================>
+

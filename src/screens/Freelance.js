@@ -1,9 +1,17 @@
+// <===================================================================Import-Section-Start===================================================================================>
+
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Dimensions, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { heading, colors } from '../global/style'
 import { WorkPostrequest } from '../Data/WorkAPI'
+import { WorkDeleteNotification } from '../Notifications/Notifications'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
+// <===================================================================Import-Section-End===================================================================================>
+
+
+// <===================================================================Logic-Section-Start===================================================================================>
 
 export default function Freelance() {
 
@@ -18,34 +26,44 @@ export default function Freelance() {
 
   async function Post() {
 
-    const params = {
-      "w_name": wname,
-      "w_req": Requirements,
-      "w_rate": Price,
-      "w_des": Description,
-      "c_name": Cname,
-      "c_number": Cnumber,
-      "e_mail": email
-    }
-
-    await WorkPostrequest( params).then(res => {
-      console.log(res.data);
-      console.log("work ka data he", params);
-    })
-      .catch(error => {
-        console.log(error);
+    const Email =  await AsyncStorage.getItem('Email');
+    if (Email == email) {
+      const params = {
+        "w_name": wname,
+        "w_req": Requirements,
+        "w_rate": Price,
+        "w_des": Description,
+        "c_name": Cname,
+        "c_number": Cnumber,
+        "e_mail": email
+      }
+  
+      await WorkPostrequest(params).then(res => {
+        console.log(res.data);
+        console.log("work ka data he", params);
+        WorkDeleteNotification();
       })
-
-    setPress(!Press)
-    setname('')
-    setRequirements('')
-    setPrice('')
-    setDescription('')
-    setemail('')
-    setCname('')
-    setCnumber('')
+        .catch(error => {
+          console.log(error);
+        })
+  
+      setPress(!Press)
+      setname('')
+      setRequirements('')
+      setPrice('')
+      setDescription('')
+      setemail('')
+      setCname('')
+      setCnumber('')
+    } else {
+      alert('entered email should be same as login email')
+    }
   }
 
+// <===================================================================Logic-Section-End===================================================================================>
+
+
+// <===================================================================Frontend-Section-Start===================================================================================>
 
   return (
     <View style={styles.container}>
@@ -59,9 +77,9 @@ export default function Freelance() {
           <TextInput value={Cname} onChangeText={(d) => setCname(d)} placeholder='name' placeholderTextColor={'black'} style={styles.input_box} />
           <TextInput value={Cnumber} onChangeText={(d) => setCnumber(d)} placeholder='number' placeholderTextColor={'black'} style={styles.input_box} />
           <TextInput value={email} onChangeText={(d) => setemail(d)} placeholder='email' placeholderTextColor={'black'} style={styles.input_box} />
-          <TouchableOpacity style={Press ? styles.btn : styles.btn1} onPress={Post}><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
         </View>
       </ScrollView>
+      <TouchableOpacity style={Press ? styles.btn : styles.btn1} onPress={Post}><Text style={styles.btn_txt}>Post</Text></TouchableOpacity>
     </View>
   )
 }
@@ -112,3 +130,5 @@ const styles = StyleSheet.create({
   }
 
 })
+
+// <===================================================================Frontend-Section-End===================================================================================>

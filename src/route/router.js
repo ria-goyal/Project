@@ -4,21 +4,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Text, View } from 'react-native'
 // import Productinfoscreen from '../screens/Productinfocardscreen'
-import Review from '../screens/Review'
+import Settings from '../screens/Settings'
 import Productedit from '../screens/Producteditscreen'
 import Workedit from '../screens/Workeditscreen'
 import Account from '../screens/Account'
 import Sell from '../screens/Sell'
 import Freelance from '../screens/Freelance'
-import Startscreen from '../screens/Startscreen'
+import Developerscreen from '../screens/Developerscreen'
 import HomeScreen from '../screens/HomeScreen'
 import Productinfocard from '../screens/Productinfocardscreen'
 import Workinfocard from '../screens/Workinfocardscreen'
 import Loginscreen from '../screens/Loginscreen'
 import Signupscreen from '../screens/Signupscreen'
-import Forgotpassword from '../screens/Forgotpasswordscreen'
-import Verificationscreen from '../screens/Verificationscreen'
+import TermsConditions from '../screens/Terms&Conditions'
+import PrivacyPolicy from '../screens/PrivacyPolicy'
 import Newpasswordscreen from '../screens/Newpasswordscreen'
+import Workeditscreen from '../screens/Workeditscreen'
+import Producteditscreen from '../screens/Producteditscreen'
 const tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
  function StackNav() {
@@ -28,15 +30,18 @@ const Stack = createStackNavigator();
                 <Stack.Navigator 
                 initialRouteName="start"
                 screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="start" component={Startscreen} />
                     <Stack.Screen name="home" component={TabNav} />
                     <Stack.Screen name="productcard" component={Productinfocard} />
                     <Stack.Screen name="workcard" component={Workinfocard} />
                     <Stack.Screen name="login" component={Loginscreen} />
                     <Stack.Screen name="register" component={Signupscreen} />
-                    <Stack.Screen name="forgotpassword" component={Forgotpassword} />
-                    <Stack.Screen name="verification" component={Verificationscreen} />
                     <Stack.Screen name="newpassword" component={Newpasswordscreen} />      
+                    <Stack.Screen name="workedit" component={Workeditscreen} />      
+                    <Stack.Screen name="productedit" component={Producteditscreen} />      
+                    <Stack.Screen name="setting" component={Settings} />      
+                    <Stack.Screen name="developer" component={Developerscreen} />
+                    <Stack.Screen name="privacypolicy" component={PrivacyPolicy} />
+                    <Stack.Screen name="terms&conditions" component={TermsConditions} />
                 </Stack.Navigator>
         </>
     )

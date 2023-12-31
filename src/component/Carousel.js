@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View,Image,Dimensions } from 'react-native'
+import { StyleSheet, Text, View,Image,Dimensions,LogBox } from 'react-native'
 import React from 'react'
 import { SliderBox } from "react-native-image-slider-box";
+
 const w=Dimensions.get('screen').width
 const h=Dimensions.get('screen').height
+
 const image=[
     require('../images/images/photo1.png'),
     require('../images/images/photo2.png'),
     require('../images/images/photo3.png')
 ]
-const Corousel = () => {
+const Carousel = () => {
   return (
     <View style={styles.cont}>
       <View style={styles.slider}>
@@ -18,13 +20,13 @@ const Corousel = () => {
   )
 }
 
-export default Corousel
+export default Carousel
 
 const styles = StyleSheet.create({
-    cont:{
+    // cont:{
         
         
-    },
+    // },
     slider_box:{
         width:w,
         height:h*.24,

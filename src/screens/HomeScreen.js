@@ -1,50 +1,63 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
-import React, { useContext, useEffect, useState, } from 'react'
+// <===================================================================Import-Section-Start===================================================================================>
+
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, RefreshControl, SectionList, Linking } from 'react-native'
+import React, { useEffect, useState, } from 'react'
 import Headercomponent from '../component/Headercomp'
-import Search from '../component/search'
 import { colors } from '../global/style'
-import Corousel from '../component/corousel'
+import Carousel from '../component/Carousel'
 import Bar from '../component/Bar'
 import heart from '../images/logos/heart.png'
-import { FlatList, } from 'react-native-gesture-handler'
-import { ContextAuth } from '../Context/Context';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ScrollView } from 'react-native-virtualized-view'
 import { WorkGetrequest } from '../Data/WorkAPI'
 import { ProductGetrequest } from '../Data/ProductAPI'
+import { FlashList } from "@shopify/flash-list";
+import PushNotification from "react-native-push-notification";
 const w = Dimensions.get('screen').width
 const h = Dimensions.get('screen').height
+
+// <===================================================================Import-Section-End===================================================================================>
+
+
+// <===================================================================Logic-Section-Start===================================================================================>
 
 export default function HomeScreen({ navigation }) {
   const [product, setproduct] = useState('')
   const [work, setwork] = useState('')
-  const data = useContext(ContextAuth)
+  const [refresh, setrefresh] = useState(false)
 
-  const getworkAPIdata = async ()=>{
-     await WorkGetrequest().then(res =>{
-      console.log(res.data);
-      setwork(res.data)
-     })
-     .catch(error =>{
-      console.log(error);
-     })
-     console.log("work ka data he",work);
-  }
-  const getproductAPIdata = async ()=>{
-     await ProductGetrequest().then(res =>{
-      console.log(res.data);
-      setproduct(res.data)
-     })
-     .catch(error =>{
-      console.log(error);
-     })
-     console.log("product ka data he",product);
-  }
-  
   useEffect(() => {
     getworkAPIdata();
     getproductAPIdata();
-  },[])
+    Createchannel();
+  }, [])
+
+  // <==================Product-Section-Start======================>
+  const getproductAPIdata = async () => {
+    await ProductGetrequest().then(res => {
+      // console.log(res.data);
+      setproduct(res.data)
+    })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  function Productcardshow() {
+    return (
+      <>
+        <View style={{ width: w, height: '50%' }}>
+          <FlashList
+            numColumns={2}
+            data={product}
+            renderItem={({ item }) => Renderproduct(item)}
+            estimatedItemSize={200}
+            keyExtractor={(item) => item._id}
+            listKey="product"
+          />
+        </View>
+      </>
+    )
+  }
 
   function Renderproduct(item) {
     return (
@@ -71,10 +84,8 @@ export default function HomeScreen({ navigation }) {
     )
   }
   async function Productcard(item) {
-    // console.log("**********",item);
     const email = await AsyncStorage.getItem('Email');
     const pass = await AsyncStorage.getItem('Pass');
-    console.log('email ka data btao', email);
     if (email !== null && email !== undefined && email !== '' && pass !== null && pass !== undefined && pass !== '') {
       navigation.navigate('productcard', { ...item })
     }
@@ -83,17 +94,33 @@ export default function HomeScreen({ navigation }) {
       navigation.navigate('login')
     }
   }
+  // <==================Product-Section-End======================>
 
-  function Productcardshow() {
+
+  // <==================Work-Section-Start======================>
+  const getworkAPIdata = async () => {
+    await WorkGetrequest().then(res => {
+      // console.log(res.data);
+      setwork(res.data)
+    })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  function Workcardshow() {
     return (
       <>
-        <FlatList
-          numColumns={2}
-          data={product}
-          renderItem={({ item }) => Renderproduct(item)}
-          keyExtractor={(item) => item.p_id}
-          listKey="product"
-        />
+        <View style={{ width: w, height: '50%' }}>
+          <FlashList
+            numColumns={2}
+            data={work}
+            renderItem={({ item }) => Renderwork(item)}
+            estimatedItemSize={200}
+            keyExtractor={(item) => item._id}
+            listKey="work"
+          />
+        </View>
       </>
     )
   }
@@ -135,41 +162,77 @@ export default function HomeScreen({ navigation }) {
     }
   }
 
-  function Workcardshow() {
-    return (
-      <>
-        <FlatList
-          numColumns={2}
-          data={work}
-          renderItem={({ item }) => Renderwork(item)}
-          keyExtractor={(item) => item.w_id}
-          listKey="work"
-        />
-      </>
-    )
-  }
 
+  // <==================Work-Section-End======================>
+
+
+  // <==================Other-Section-Start======================>
+  const Pullme = () => {
+    setrefresh(true);
+    // console.log("shuru hua");
+    try {
+      Promise.all([getworkAPIdata(), getproductAPIdata()]).then(() => {
+        setrefresh(false);
+        // console.log("khatam hua");
+      });
+    } catch (error) {
+      console.error("Error in pull to refresh:", error);
+      setrefresh(false);
+    }
+  };
+
+  function Createchannel() {
+    PushNotification.createChannel(
+      {
+        channelId: 'channel-id',
+        channelName: 'Channel Name',
+        channelDescription: 'Channel Description',
+        playSound: true,
+        soundName: 'default',
+        importance: 4,
+        vibrate: true,
+      },
+      // (created) => console.log(`Channel created: ${created}`),
+    );
+  }
+  // <==================Other-Section-End======================>
+
+  // <===================================================================Logic-Section-End===================================================================================>
+
+
+  // <===================================================================Frontend-Section-Start===================================================================================>
   return (
     <>
       <View style={styles.container}>
         <Headercomponent />
-        <Search />
-        <ScrollView nestedScrollEnabled={true}>
-          <Corousel />
-          <Bar />
-          <View style={styles.cards}>
-            {Productcardshow()}
-          </View>
-          <View style={styles.cards}>
-            {Workcardshow()}
-          </View>
-        </ScrollView>
+        <SectionList
+          sections={[
+            { title: 'carousel', data: [1] },
+            { title: 'bar', data: [2] },
+            { title: 'products', data: [product], key: 'product' },
+            { title: 'works', data: [work], key: 'work' },
+          ]}
+          renderItem={({ section }) => {
+            switch (section.title) {
+              case 'carousel':
+                return <Carousel />;
+              case 'bar':
+                return <Bar />;
+              case 'products':
+                return <Productcardshow />;
+              case 'works':
+                return <Workcardshow />;
+              default:
+                return null;
+            }
+          }}
+          keyExtractor={(item, index) => index.toString()}
+          refreshControl={<RefreshControl refreshing={refresh} onRefresh={Pullme} />}
+        />
       </View>
     </>
   )
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -189,7 +252,7 @@ const styles = StyleSheet.create({
     marginVertical: h * .01,
     borderRadius: w * .05,
     overflow: 'hidden',
-    elevation: 1
+    elevation: 20
   },
   card_img: {
     height: h * .2,
@@ -212,3 +275,4 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
   }
 })
+// <===================================================================Frontend-Section-End===================================================================================>

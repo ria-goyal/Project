@@ -1,4 +1,5 @@
-import React,  { useContext, useEffect, useState, } from 'react';
+// <===================================================================Import-Section-Start===================================================================================>
+import React, { useContext, useEffect, useState, } from 'react';
 import {
     Text,
     View,
@@ -10,32 +11,54 @@ import {
 } from 'react-native';
 import arrow from '../images/logos/arrow.png';
 import share from '../images/logos/share.png';
-import heart from '../images/logos/heart.png';
 import email from '../images/logos/email.png';
 import phone from '../images/logos/phone.png';
 import robot from '../images/logos/robot.png'
-import { ContextAuth } from '../Context/Context';
-
+import Share from 'react-native-share';
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
+// <===================================================================Import-Section-End===================================================================================>
 
-export default function Workinfocard({navigation,route}) {
 
-    const data = useContext(ContextAuth)
-    const [work,setwork]=useState(route.params)
-    const [contact,setcontact]=useState('')
-    
-    console.log("contact*****************",contact);
-    console.log("route*****************",route);
-    useEffect(()=>{
-        const {contactdetails} = data
-        setcontact(contactdetails)
+
+// <===================================================================Logic-Section-Start===================================================================================>
+export default function Workinfocard({ navigation, route }) {
+
+    const [work, setwork] = useState(route.params)
+    useEffect(() => {
         setwork(route.params)
-      },[])
+    }, [])
 
-    function Backbutton(){
+    function Backbutton() {
         navigation.goBack()
     }
+
+    async function Sharework(work) {
+
+        const img = 'file:///data/user/0/com.firstproject/cache/rn_image_picker_lib_temp_e27439b4-3d11-48d0-abaf-7d0b3d76eae4.png'
+        const name = [
+            "WORK NAME:- " + work.c_name,
+            "WORK RATE:- " + work.w_rate,
+            "WORK REQUIREMENTS:- " + work.w_req,
+            "WORK DESCRIPTION:- " + work.w_des + "\n",
+            'To grab this opportunity visit us on ReviveX!'
+        ].join('\n\n');
+
+        try {
+            const shareoption = {
+                message: name,
+                url: img,
+            }
+            const Shareresponse = await Share.open(shareoption);
+        } catch (error) {
+            console.log("error in share", error);
+        }
+    }
+    // <===================================================================Logic-Section-End===================================================================================>
+
+
+
+    // <===================================================================Frontend-Section-Start===================================================================================>
     return (
         <>
             <View style={styles.container}>
@@ -46,7 +69,7 @@ export default function Workinfocard({navigation,route}) {
                                 <Image source={arrow} style={styles.arrowimage} />
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => Sharework(work)}>
                             <View style={styles.shareview}>
                                 <Image source={share} style={styles.shareimage} />
                             </View>
@@ -241,3 +264,4 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 });
+// <===================================================================Frontend-Section-End===================================================================================>
